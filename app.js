@@ -1,12 +1,5 @@
-//
-/// Setup the Symple server
-
-var Symple = require('symple');
-var sy = new Symple();
-sy.loadConfig(__dirname + '/symple.json'); // see config.json for options
-sy.init();
-console.log('Symple server listening on port ' + sy.config.port);
-
+var https   = require("https");
+var fs      = require("fs");
 
 //
 /// Setup the demo client web server
@@ -14,13 +7,15 @@ console.log('Symple server listening on port ' + sy.config.port);
 var express = require('express'),
   path = require('path'),
   app = express(),
-  serverPort = parseInt(sy.config.port)
-  clientPort = serverPort - 1;
+  port = parseInt(process.env.PORT);
 
-app.set('port', clientPort);
+app.set('port', port);
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/');
 app.use(express.static(__dirname + '/assets'));
+//app.use(express.static(__dirname + '/node_modules/symple-client/src'));
+//app.use(express.static(__dirname + '/node_modules/symple-client-player/src'));
+
 
 app.get('/', function (req, res) {
   res.render('index', {
