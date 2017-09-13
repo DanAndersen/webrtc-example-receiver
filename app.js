@@ -19,7 +19,6 @@ app.use(express.static(__dirname + '/assets'));
 
 app.get('/', function (req, res) {
   res.render('index', {
-    port: serverPort,
     peer: {
       user: 'star-mentor',
       name: 'STAR Mentor',
