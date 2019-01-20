@@ -16,13 +16,17 @@ app.use(express.static(__dirname + '/assets'));
 //app.use(express.static(__dirname + '/node_modules/symple-client/src'));
 //app.use(express.static(__dirname + '/node_modules/symple-client-player/src'));
 
-
 app.get('/', function (req, res) {
+
+  var user = req.query.user || 'star-mentor';
+  var name = req.query.name || 'STAR Mentor';
+  var group = req.query.group || 'public';
+
   res.render('index', {
     peer: {
-      user: 'star-mentor',
-      name: 'STAR Mentor',
-      group: 'public'
+      user: user,
+      name: name,
+      group: group
     }
   });
 });
